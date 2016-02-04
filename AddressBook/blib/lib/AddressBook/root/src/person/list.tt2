@@ -1,0 +1,13 @@
+[% META title='People' %]
+
+[% IF people.count > 0 %]
+	<p>Here are the people that I know about:</p>
+	<ul>
+		[% WHILE (person = people.next) %]
+			<li>[% INCLUDE person_fragment.tt2 %]</li>
+		[% END %]
+	</ul>
+[% ELSE %]
+	<p>No People Added Yet!</p>
+[% END %]
+<p><a href="[% c.uri_for("/person/add") | html %]">Add a new person</a></p>

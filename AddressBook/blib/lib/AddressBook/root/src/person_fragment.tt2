@@ -1,0 +1,11 @@
+<b>[% person.name | html %]</b>
+<a href="[% c.uri_for_action('/address/add',person.id) %]"> Add Address</a>
+<a href="[% c.uri_for_action('/person/edit',person.id) %]">  Edit Person</a>
+<a href="[% c.uri_for_action('/person/delete',person.id) %]">  Delete Person</a>
+
+[% SET addresses = person.addresses %]
+<ul>
+	[% FOREACH address = addresses %]
+		<li>[% INCLUDE address_fragment.tt2 %]</li>
+	[% END %]
+</ul>

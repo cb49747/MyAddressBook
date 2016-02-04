@@ -1,0 +1,9 @@
+[% META title = 'Welcome To The Address Book' %]
+
+<p>Here you will find all things for my address book</p>
+<p>from here, you can:
+	<ul>
+		<li><a href="[% c.uri_for('/person/list') %]">Look at all people</a></li>
+		<li><a href="[% c.uri_for('/person/add') %]">Add a new person</a></li>
+	</ul>
+</p>
