@@ -40,9 +40,8 @@ __PACKAGE__->table("sessions");
 
 =head2 id
 
-  data_type: 'char'
-  is_nullable: 0
-  size: 72
+  data_type: 'text'
+  is_nullable: 1
 
 =head2 session_data
 
@@ -58,7 +57,7 @@ __PACKAGE__->table("sessions");
 
 __PACKAGE__->add_columns(
   "id",
-  { data_type => "char", is_nullable => 0, size => 72 },
+  { data_type => "text", is_nullable => 1 },
   "session_data",
   { data_type => "text", is_nullable => 1 },
   "expires",
@@ -78,8 +77,8 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("id");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07043 @ 2015-12-10 14:56:29
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:u/gz0BlLFq8IaaD15UwJaQ
+# Created by DBIx::Class::Schema::Loader v0.07043 @ 2016-02-05 09:48:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:58RNkCA/7QRY6HssYoUF5g
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

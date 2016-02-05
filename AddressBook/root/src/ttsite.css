@@ -31,6 +31,11 @@ body {
     padding: 10px;
 }
 
+#userinfo {
+	font-size: .8em;
+	text-align: right;
+}
+
 h1.title {
     padding: 4px;
     margin: 0px;
