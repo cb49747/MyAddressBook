@@ -44,13 +44,13 @@ DLSRC = dl_dlopen.xs
 EXE_EXT = 
 FULL_AR = /usr/bin/ar
 LD = env MACOSX_DEPLOYMENT_TARGET=10.3 cc
-LDDLFLAGS =  -bundle -undefined dynamic_lookup -fstack-protector
-LDFLAGS =  -fstack-protector
+LDDLFLAGS =  -bundle -undefined dynamic_lookup -L/usr/local/lib -fstack-protector
+LDFLAGS =  -fstack-protector -L/usr/local/lib
 LIBC = 
 LIB_EXT = .a
 OBJ_EXT = .o
 OSNAME = darwin
-OSVERS = 13.3.0
+OSVERS = 11.4.0
 RANLIB = ranlib
 SITELIBEXP = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2
 SITEARCHEXP = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2/darwin-2level
