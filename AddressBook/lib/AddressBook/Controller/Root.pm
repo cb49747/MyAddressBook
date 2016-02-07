@@ -35,6 +35,11 @@ sub default : Private {
 	$c->stash->{template} = 'not_found.tt2';
 }
 
+sub access_denied : Private {
+	my ($self, $c) = @_;
+	$c->stash->{template} = 'denied.tt2';
+}
+
 sub index : Private {};
 
 =head2 end

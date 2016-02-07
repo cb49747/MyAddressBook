@@ -24,6 +24,8 @@ use Catalyst qw/
     Session::State::Cookie
     Session::Store::DBIC
     Authentication
+    Authorization::Roles
+    Authorization::ACL
 /;
 
 extends 'Catalyst';
@@ -56,6 +58,17 @@ __PACKAGE__->config->{'Plugin::Authentication'} = {
 
 # Start the application
 __PACKAGE__->setup();
+
+## ACLs
+
+__PACKAGE__ -> deny_access_unless('/person', [qw/viewer/]);
+__PACKAGE__ -> deny_access_unless('/search', [qw/viewer/]);
+__PACKAGE__ -> deny_access_unless('/address', [qw/viewer/]);
+ 
+## should always be allowed
+
+__PACKAGE__ -> allow_access('/index');
+__PACKAGE__ -> allow_access('/auth/login');
 
 =encoding utf8
 

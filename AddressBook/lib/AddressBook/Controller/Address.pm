@@ -31,6 +31,28 @@ sub edit : Local Form {
 	my $form = $self->formbuilder;
 	my $address;
 	
+	## Check ACL
+	if ($c->user->person) {	
+		if (!$address_id) {
+			if ($person_id != $c->user->person && !$c->check_any_user_role('editor')) {
+				$c->stash->{error} = 'You are not authorized to add an address for this person.';
+				$c->detach('/auth/access_denied');	
+			}
+		}
+		else {
+			my $address_by_person_id = $c->model('AddressDB::Addresses')->find({person => $c->user->person}, {id => $address_id});
+			if (!$address_by_person_id->id && !$c->check_any_user_role('editor'))	{
+				$c->stash->{error} = 'You are not authorized to edit the address of this person().';
+				$c->detach('/auth/access_denied');
+			}
+		}
+	}
+	else {
+			$c->stash->{error} = 'No Person attached to your login!';
+			$c->detach('/person/list');
+	}
+	## End Check ACL
+	
 	if (!$address_id && $person_id) {
 		# We are adding a new address to $person
 		# Check that the person exists.
@@ -49,6 +71,7 @@ sub edit : Local Form {
 			$c->detach('/person/list');
 		}
 	}
+	
 	if ($form->submitted && $form->validate) {
 		# Transfer data from form to database
 		$address->location($form->field('location'));
@@ -63,7 +86,7 @@ sub edit : Local Form {
 		# transfer data from database to form
 		$c->stash->{address} = $address;
 		if (!$address_id) { $c->stash->{message} = 'Adding a new address '; }
-		else { $c->stash->{message} = 'Updating an address'; }
+		else { $c->stash->{message} = 'Updating an address '; }
 		$c->stash->{message} .= 'for ' . $address->person->name;
 		$form->field(name => 'location', value=> $address->location);
 		$form->field(name => 'postal', value=> $address->postal);
@@ -75,6 +98,20 @@ sub edit : Local Form {
 sub delete : Local {
 	my ($self, $c, $address_id) = @_;
 	my $address = $c->model('AddressDB::Addresses')->find({id => $address_id});
+	
+	## Check ACL
+	if ($c->user->person) {	
+		if ($address->person->id != $c->user->person && !$c->check_any_user_role('editor'))	{
+				$c->stash->{error} = 'You are not authorized to delete the address of this person.';
+				$c->detach('/auth/access_denied');
+		}
+	}
+	else {
+		$c->stash->{error} = 'No Person attached to your login!';
+		$c->detach('/person/list');
+	}
+	## End Check ACL
+	
 	if ($address) {
 		#Deleted First Last's Home address
 		$c->stash->{message} = 'Deleted ' . $address->person->name . q{'s} . $address->location . ' address';

@@ -1,5 +1,13 @@
 <div id="header">[% PROCESS site/header %]</div>
 
+<div id="userinfo">
+	[% IF c.user %] 
+		Logged in as [% c.user.username %] ([% c.user.person.name %]) <a href="[% c.uri_for('/logout') %]">Log Out</a>.
+	[% ELSE %]
+		Not logged in. <a href="[% c.uri_for('/login') %]">Log In</a>.
+	[% END %]
+</div>
+
 <div id="content">
 
 [% IF error %]

@@ -39,6 +39,19 @@ sub list : Local {
 sub delete : Local {
 	my ($self, $c, $id) = @_;
 	my $person = $c->model('AddressDB::People')->find({id => $id});
+	
+	## check ACL
+	if ($c->user->person) {
+		if ($person->id != $c->user->person && !$c->check_any_user_role('editor'))	{
+			$c->stash->{error} = 'You are not authorized to delete this person.';
+			$c->detach('/auth/access_denied');
+		}
+	}
+	else {
+		$c->stash->{error} = 'No Person attached to your login!';
+		$c->detach('/person/list');
+	}
+	
 	$c->stash->{person} = $person;
 	
 	if ($person) {
@@ -56,6 +69,20 @@ sub edit : Local Form{
 	my ($self, $c, $id) = @_;
 	my $form = $self->formbuilder;
 	my $person = $c->model('AddressDB::People')->find_or_new({id => $id});	
+	
+	## Check ACL
+	if ($c->user->person) {
+		if ($person->id != $c->user->person && !$c->check_any_user_role('editor'))	{
+			$c->stash->{error} = 'You are not authorized to add a new or edit this person.';
+			$c->detach('/auth/access_denied');
+		}
+	}
+	else {
+		$c->stash->{error} = 'No Person attached to your login!';
+		$c->detach('/person/list');
+	}
+	## End Check ACL
+	
 	if ($form->submitted && $form->validate) {
 		# form was submitted and validated
 		$person->firstname($form->field('firstname'));
@@ -83,8 +110,6 @@ sub add : Local Form('/person/edit') {
 Attempt to render a view, if needed.
 
 =cut
-
-sub end : ActionClass('RenderView') {}
 
 =head1 AUTHOR
 
