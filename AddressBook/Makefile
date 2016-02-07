@@ -20,13 +20,13 @@
 #     LICENSE => q[perl]
 #     NAME => q[AddressBook]
 #     NO_META => q[1]
-#     PREREQ_PM => { namespace::autoclean=>q[0], Catalyst::Plugin::Static::Simple=>q[0], ExtUtils::MakeMaker=>q[6.36], Catalyst::Plugin::ConfigLoader=>q[0], Catalyst::Action::RenderView=>q[0], Test::More=>q[0.88], Config::General=>q[0], Text::CSV_XS=>q[1.2], Catalyst::Runtime=>q[5.90103], Catalyst::Plugin::Session::Store::DBIC=>q[0], Moose=>q[0], Config::JFDI=>q[0.065] }
+#     PREREQ_PM => { Catalyst::Plugin::ConfigLoader=>q[0], Catalyst::Plugin::Authorization::ACL=>q[0.16], Catalyst::Plugin::Authorization::Roles=>q[0.09], Config::General=>q[2.60], Text::CSV_XS=>q[1.2], Catalyst::Plugin::Session::Store::DBIC=>q[0], Moose=>q[2.1604], FCGI=>q[0.77], namespace::autoclean=>q[0.28], Catalyst::Plugin::Static::Simple=>q[0], ExtUtils::MakeMaker=>q[6.36], Catalyst::Action::RenderView=>q[0], Test::More=>q[0.88], Catalyst::Plugin::Authentication=>q[0.10023], Catalyst::Runtime=>q[5.90103], Config::JFDI=>q[0.065] }
 #     TEST_REQUIRES => {  }
 #     VERSION => q[0.01]
 #     VERSION_FROM => q[lib/AddressBook.pm]
 #     dist => { PREOP=>q[$(PERL) -I. "-MModule::Install::Admin" -e "dist_preop(q($(DISTVNAME)))"] }
 #     realclean => { FILES=>q[MYMETA.yml] }
-#     test => { TESTS=>q[t/01app.t t/02pod.t t/03podcoverage.t t/controller_Address.t t/model_AddressDB.t] }
+#     test => { TESTS=>q[t/01app.t t/02pod.t t/03podcoverage.t t/controller_Address.t t/controller_Auth.t t/model_AddressDB.t] }
 
 # --- MakeMaker post_initialize section:
 
@@ -44,13 +44,13 @@ DLSRC = dl_dlopen.xs
 EXE_EXT = 
 FULL_AR = /usr/bin/ar
 LD = env MACOSX_DEPLOYMENT_TARGET=10.3 cc
-LDDLFLAGS =  -bundle -undefined dynamic_lookup -L/usr/local/lib -fstack-protector
-LDFLAGS =  -fstack-protector -L/usr/local/lib
+LDDLFLAGS =  -bundle -undefined dynamic_lookup -fstack-protector
+LDFLAGS =  -fstack-protector
 LIBC = 
 LIB_EXT = .a
 OBJ_EXT = .o
 OSNAME = darwin
-OSVERS = 11.4.0
+OSVERS = 13.3.0
 RANLIB = ranlib
 SITELIBEXP = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2
 SITEARCHEXP = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2/darwin-2level
@@ -177,13 +177,17 @@ MAN1PODS = script/addressbook_cgi.pl \
 	script/random_addresses.pl
 MAN3PODS = lib/AddressBook.pm \
 	lib/AddressBook/Controller/Address.pm \
+	lib/AddressBook/Controller/Auth.pm \
 	lib/AddressBook/Controller/Person.pm \
 	lib/AddressBook/Controller/Root.pm \
 	lib/AddressBook/Controller/Search.pm \
 	lib/AddressBook/Model/AddressDB.pm \
 	lib/AddressBook/Schema/AddressDB/Result/Addresses.pm \
 	lib/AddressBook/Schema/AddressDB/Result/People.pm \
+	lib/AddressBook/Schema/AddressDB/Result/Role.pm \
 	lib/AddressBook/Schema/AddressDB/Result/Session.pm \
+	lib/AddressBook/Schema/AddressDB/Result/User.pm \
+	lib/AddressBook/Schema/AddressDB/Result/UserRole.pm \
 	lib/AddressBook/View/HTML.pm
 
 # Where is the Config information that we are using/depend on
@@ -208,6 +212,7 @@ PERL_ARCHIVE_AFTER =
 
 TO_INST_PM = lib/AddressBook.pm \
 	lib/AddressBook/Controller/Address.pm \
+	lib/AddressBook/Controller/Auth.pm \
 	lib/AddressBook/Controller/Person.pm \
 	lib/AddressBook/Controller/Root.pm \
 	lib/AddressBook/Controller/Search.pm \
@@ -216,13 +221,18 @@ TO_INST_PM = lib/AddressBook.pm \
 	lib/AddressBook/Schema/AddressDB.pm \
 	lib/AddressBook/Schema/AddressDB/Result/Addresses.pm \
 	lib/AddressBook/Schema/AddressDB/Result/People.pm \
+	lib/AddressBook/Schema/AddressDB/Result/Role.pm \
 	lib/AddressBook/Schema/AddressDB/Result/Session.pm \
+	lib/AddressBook/Schema/AddressDB/Result/User.pm \
+	lib/AddressBook/Schema/AddressDB/Result/UserRole.pm \
 	lib/AddressBook/View/HTML.pm
 
 PM_TO_BLIB = lib/AddressBook.pm \
 	blib/lib/AddressBook.pm \
 	lib/AddressBook/Controller/Address.pm \
 	blib/lib/AddressBook/Controller/Address.pm \
+	lib/AddressBook/Controller/Auth.pm \
+	blib/lib/AddressBook/Controller/Auth.pm \
 	lib/AddressBook/Controller/Person.pm \
 	blib/lib/AddressBook/Controller/Person.pm \
 	lib/AddressBook/Controller/Root.pm \
@@ -239,8 +249,14 @@ PM_TO_BLIB = lib/AddressBook.pm \
 	blib/lib/AddressBook/Schema/AddressDB/Result/Addresses.pm \
 	lib/AddressBook/Schema/AddressDB/Result/People.pm \
 	blib/lib/AddressBook/Schema/AddressDB/Result/People.pm \
+	lib/AddressBook/Schema/AddressDB/Result/Role.pm \
+	blib/lib/AddressBook/Schema/AddressDB/Result/Role.pm \
 	lib/AddressBook/Schema/AddressDB/Result/Session.pm \
 	blib/lib/AddressBook/Schema/AddressDB/Result/Session.pm \
+	lib/AddressBook/Schema/AddressDB/Result/User.pm \
+	blib/lib/AddressBook/Schema/AddressDB/Result/User.pm \
+	lib/AddressBook/Schema/AddressDB/Result/UserRole.pm \
+	blib/lib/AddressBook/Schema/AddressDB/Result/UserRole.pm \
 	lib/AddressBook/View/HTML.pm \
 	blib/lib/AddressBook/View/HTML.pm
 
@@ -467,13 +483,17 @@ POD2MAN = $(POD2MAN_EXE)
 manifypods : pure_all  \
 	lib/AddressBook.pm \
 	lib/AddressBook/Controller/Address.pm \
+	lib/AddressBook/Controller/Auth.pm \
 	lib/AddressBook/Controller/Person.pm \
 	lib/AddressBook/Controller/Root.pm \
 	lib/AddressBook/Controller/Search.pm \
 	lib/AddressBook/Model/AddressDB.pm \
 	lib/AddressBook/Schema/AddressDB/Result/Addresses.pm \
 	lib/AddressBook/Schema/AddressDB/Result/People.pm \
+	lib/AddressBook/Schema/AddressDB/Result/Role.pm \
 	lib/AddressBook/Schema/AddressDB/Result/Session.pm \
+	lib/AddressBook/Schema/AddressDB/Result/User.pm \
+	lib/AddressBook/Schema/AddressDB/Result/UserRole.pm \
 	lib/AddressBook/View/HTML.pm \
 	script/addressbook_cgi.pl \
 	script/addressbook_create.pl \
@@ -493,13 +513,17 @@ manifypods : pure_all  \
 	$(NOECHO) $(POD2MAN) --section=3 --perm_rw=$(PERM_RW) \
 	  lib/AddressBook.pm $(INST_MAN3DIR)/AddressBook.$(MAN3EXT) \
 	  lib/AddressBook/Controller/Address.pm $(INST_MAN3DIR)/AddressBook::Controller::Address.$(MAN3EXT) \
+	  lib/AddressBook/Controller/Auth.pm $(INST_MAN3DIR)/AddressBook::Controller::Auth.$(MAN3EXT) \
 	  lib/AddressBook/Controller/Person.pm $(INST_MAN3DIR)/AddressBook::Controller::Person.$(MAN3EXT) \
 	  lib/AddressBook/Controller/Root.pm $(INST_MAN3DIR)/AddressBook::Controller::Root.$(MAN3EXT) \
 	  lib/AddressBook/Controller/Search.pm $(INST_MAN3DIR)/AddressBook::Controller::Search.$(MAN3EXT) \
 	  lib/AddressBook/Model/AddressDB.pm $(INST_MAN3DIR)/AddressBook::Model::AddressDB.$(MAN3EXT) \
 	  lib/AddressBook/Schema/AddressDB/Result/Addresses.pm $(INST_MAN3DIR)/AddressBook::Schema::AddressDB::Result::Addresses.$(MAN3EXT) \
 	  lib/AddressBook/Schema/AddressDB/Result/People.pm $(INST_MAN3DIR)/AddressBook::Schema::AddressDB::Result::People.$(MAN3EXT) \
+	  lib/AddressBook/Schema/AddressDB/Result/Role.pm $(INST_MAN3DIR)/AddressBook::Schema::AddressDB::Result::Role.$(MAN3EXT) \
 	  lib/AddressBook/Schema/AddressDB/Result/Session.pm $(INST_MAN3DIR)/AddressBook::Schema::AddressDB::Result::Session.$(MAN3EXT) \
+	  lib/AddressBook/Schema/AddressDB/Result/User.pm $(INST_MAN3DIR)/AddressBook::Schema::AddressDB::Result::User.$(MAN3EXT) \
+	  lib/AddressBook/Schema/AddressDB/Result/UserRole.pm $(INST_MAN3DIR)/AddressBook::Schema::AddressDB::Result::UserRole.$(MAN3EXT) \
 	  lib/AddressBook/View/HTML.pm $(INST_MAN3DIR)/AddressBook::View::HTML.$(MAN3EXT) 
 
 
@@ -893,7 +917,7 @@ $(MAKE_APERL_FILE) : $(FIRST_MAKEFILE) pm_to_blib
 TEST_VERBOSE=0
 TEST_TYPE=test_$(LINKTYPE)
 TEST_FILE = test.pl
-TEST_FILES = t/01app.t t/02pod.t t/03podcoverage.t t/controller_Address.t t/model_AddressDB.t
+TEST_FILES = t/01app.t t/02pod.t t/03podcoverage.t t/controller_Address.t t/controller_Auth.t t/model_AddressDB.t
 TESTDB_SW = -d
 
 testdb :: testdb_$(LINKTYPE)
@@ -924,15 +948,19 @@ ppd :
 	$(NOECHO) $(ECHO) '    <AUTHOR>System Administrator</AUTHOR>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Action::RenderView" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Plugin::Authentication" VERSION="0.10023" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Plugin::Authorization::ACL" VERSION="0.16" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Plugin::Authorization::Roles" VERSION="0.09" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Plugin::ConfigLoader" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Plugin::Session::Store::DBIC" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Plugin::Static::Simple" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Runtime" VERSION="5.90103" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Config::General" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Config::General" VERSION="2.6" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Config::JFDI" VERSION="0.065" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Moose::" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="FCGI::" VERSION="0.77" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Moose::" VERSION="2.1604" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Text::CSV_XS" VERSION="1.2" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <REQUIRE NAME="namespace::autoclean" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="namespace::autoclean" VERSION="0.28" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="darwin-2level-5.14" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    </IMPLEMENTATION>' >> $(DISTNAME).ppd
@@ -945,6 +973,7 @@ pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e 'pm_to_blib({@ARGV}, '\''$(INST_LIB)/auto'\'', q[$(PM_FILTER)], '\''$(PERM_DIR)'\'')' -- \
 	  lib/AddressBook.pm blib/lib/AddressBook.pm \
 	  lib/AddressBook/Controller/Address.pm blib/lib/AddressBook/Controller/Address.pm \
+	  lib/AddressBook/Controller/Auth.pm blib/lib/AddressBook/Controller/Auth.pm \
 	  lib/AddressBook/Controller/Person.pm blib/lib/AddressBook/Controller/Person.pm \
 	  lib/AddressBook/Controller/Root.pm blib/lib/AddressBook/Controller/Root.pm \
 	  lib/AddressBook/Controller/Search.pm blib/lib/AddressBook/Controller/Search.pm \
@@ -953,7 +982,10 @@ pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	  lib/AddressBook/Schema/AddressDB.pm blib/lib/AddressBook/Schema/AddressDB.pm \
 	  lib/AddressBook/Schema/AddressDB/Result/Addresses.pm blib/lib/AddressBook/Schema/AddressDB/Result/Addresses.pm \
 	  lib/AddressBook/Schema/AddressDB/Result/People.pm blib/lib/AddressBook/Schema/AddressDB/Result/People.pm \
+	  lib/AddressBook/Schema/AddressDB/Result/Role.pm blib/lib/AddressBook/Schema/AddressDB/Result/Role.pm \
 	  lib/AddressBook/Schema/AddressDB/Result/Session.pm blib/lib/AddressBook/Schema/AddressDB/Result/Session.pm \
+	  lib/AddressBook/Schema/AddressDB/Result/User.pm blib/lib/AddressBook/Schema/AddressDB/Result/User.pm \
+	  lib/AddressBook/Schema/AddressDB/Result/UserRole.pm blib/lib/AddressBook/Schema/AddressDB/Result/UserRole.pm \
 	  lib/AddressBook/View/HTML.pm blib/lib/AddressBook/View/HTML.pm 
 	$(NOECHO) $(TOUCH) pm_to_blib
 
@@ -991,7 +1023,7 @@ config :: installdeps
 	$(NOECHO) $(NOOP)
 
 checkdeps ::
-	$(PERL) Makefile.PL --checkdeps
+	$(PERL) Makefile.pl --checkdeps
 
 installdeps ::
 	$(NOECHO) $(NOOP)
@@ -1000,14 +1032,14 @@ installdeps_notest ::
 	$(NOECHO) $(NOOP)
 
 upgradedeps ::
-	$(PERL) Makefile.PL --config= --upgradedeps=Test::More,0.88,Catalyst::Runtime,5.90103,Catalyst::Plugin::ConfigLoader,0,Catalyst::Plugin::Static::Simple,0,Catalyst::Action::RenderView,0,Catalyst::Plugin::Session::Store::DBIC,0,Text::CSV_XS,1.2,Config::JFDI,0.065,Moose,0,namespace::autoclean,0,Config::General,0
+	$(PERL) Makefile.pl --config= --upgradedeps=Test::More,0.88,Catalyst::Runtime,5.90103,Catalyst::Plugin::ConfigLoader,0,Catalyst::Plugin::Static::Simple,0,Catalyst::Action::RenderView,0,Catalyst::Plugin::Session::Store::DBIC,0,Catalyst::Plugin::Authentication,0.10023,Catalyst::Plugin::Authorization::Roles,0.09,Catalyst::Plugin::Authorization::ACL,0.16,Text::CSV_XS,1.2,Config::JFDI,0.065,Moose,2.1604,namespace::autoclean,0.28,Config::General,2.60,FCGI,0.77
 
 upgradedeps_notest ::
-	$(PERL) Makefile.PL --config=notest,1 --upgradedeps=Test::More,0.88,Catalyst::Runtime,5.90103,Catalyst::Plugin::ConfigLoader,0,Catalyst::Plugin::Static::Simple,0,Catalyst::Action::RenderView,0,Catalyst::Plugin::Session::Store::DBIC,0,Text::CSV_XS,1.2,Config::JFDI,0.065,Moose,0,namespace::autoclean,0,Config::General,0
+	$(PERL) Makefile.pl --config=notest,1 --upgradedeps=Test::More,0.88,Catalyst::Runtime,5.90103,Catalyst::Plugin::ConfigLoader,0,Catalyst::Plugin::Static::Simple,0,Catalyst::Action::RenderView,0,Catalyst::Plugin::Session::Store::DBIC,0,Catalyst::Plugin::Authentication,0.10023,Catalyst::Plugin::Authorization::Roles,0.09,Catalyst::Plugin::Authorization::ACL,0.16,Text::CSV_XS,1.2,Config::JFDI,0.065,Moose,2.1604,namespace::autoclean,0.28,Config::General,2.60,FCGI,0.77
 
 listdeps ::
 	@$(PERL) -le "print for @ARGV" 
 
 listalldeps ::
-	@$(PERL) -le "print for @ARGV" Test::More Catalyst::Runtime Catalyst::Plugin::ConfigLoader Catalyst::Plugin::Static::Simple Catalyst::Action::RenderView Catalyst::Plugin::Session::Store::DBIC Text::CSV_XS Config::JFDI Moose namespace::autoclean Config::General
+	@$(PERL) -le "print for @ARGV" Test::More Catalyst::Runtime Catalyst::Plugin::ConfigLoader Catalyst::Plugin::Static::Simple Catalyst::Action::RenderView Catalyst::Plugin::Session::Store::DBIC Catalyst::Plugin::Authentication Catalyst::Plugin::Authorization::Roles Catalyst::Plugin::Authorization::ACL Text::CSV_XS Config::JFDI Moose namespace::autoclean Config::General FCGI
 
