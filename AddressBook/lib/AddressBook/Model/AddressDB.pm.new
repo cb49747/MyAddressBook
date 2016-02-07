@@ -7,9 +7,9 @@ __PACKAGE__->config(
     schema_class => 'AddressBook::Schema::AddressDB',
     
     connect_info => {
-        dsn => 'dbi:mysql:mckinl71_bootstraptest',
-        user => 'mckinl71_bootstr',
-        password => 'bootstraptest',
+        dsn => 'dbi:mysql:addressbook',
+        user => 'eclipse',
+        password => 'eclipsetest!',
     }
 );
 
@@ -31,7 +31,7 @@ Catalyst::Helper::Model::DBIC::Schema - 0.65
 
 =head1 AUTHOR
 
-System Administrator
+Christopher Burger
 
 =head1 LICENSE
 

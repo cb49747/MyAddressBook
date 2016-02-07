@@ -23,6 +23,7 @@ use Catalyst qw/
     Session
     Session::State::Cookie
     Session::Store::DBIC
+    Authentication
 /;
 
 extends 'Catalyst';
@@ -43,8 +44,15 @@ __PACKAGE__->config(
     # Disable deprecated behavior needed by old applications
     disable_component_resolution_regex_fallback => 1,
     enable_catalyst_header => 1, # Send X-Catalyst header
-    session => {dbic_class => 'AddressDB::Session', flash_to_stash => 1},
+    session => {dbic_class => 'AddressDB::Session', expires => 3600, flash_to_stash => 1}
 );
+
+__PACKAGE__->config->{'Plugin::Authentication'} = {
+    default => { 
+    		store => { class => 'DBIx::Class', user_class => 'AddressDB::User', password_type => 'clear', role_relation => 'roles', role_field => 'role'},
+   			credential => { class => 'Password', } 																		
+    }
+};
 
 # Start the application
 __PACKAGE__->setup();
