@@ -1,7 +1,7 @@
 # This Makefile is for the AddressBook extension to perl.
 #
 # It was generated automatically by MakeMaker version
-# 6.98 (Revision: 69800) from the contents of
+# 7.1 (Revision: 71000) from the contents of
 # Makefile.PL. Don't edit this file, edit Makefile.PL instead.
 #
 #       ANY CHANGES MADE HERE WILL BE LOST!
@@ -13,14 +13,14 @@
 
 #     ABSTRACT => q[Catalyst based application]
 #     AUTHOR => [q[System Administrator]]
-#     BUILD_REQUIRES => { Test::More=>q[0.88], ExtUtils::MakeMaker=>q[6.36] }
+#     BUILD_REQUIRES => { ExtUtils::MakeMaker=>q[6.36], Test::More=>q[0.88] }
 #     CONFIGURE_REQUIRES => {  }
 #     DISTNAME => q[AddressBook]
 #     EXE_FILES => [q[script/addressbook_cgi.pl], q[script/addressbook_create.pl], q[script/addressbook_fastcgi.pl], q[script/addressbook_server.pl], q[script/addressbook_test.pl], q[script/import_csv.pl], q[script/random_addresses.pl]]
 #     LICENSE => q[perl]
 #     NAME => q[AddressBook]
 #     NO_META => q[1]
-#     PREREQ_PM => { Catalyst::Plugin::ConfigLoader=>q[0], Catalyst::Plugin::Authorization::ACL=>q[0.16], Catalyst::Plugin::Authorization::Roles=>q[0.09], Config::General=>q[2.60], Text::CSV_XS=>q[1.2], Catalyst::Plugin::Session::Store::DBIC=>q[0], Moose=>q[2.1604], FCGI=>q[0.77], namespace::autoclean=>q[0.28], Catalyst::Plugin::Static::Simple=>q[0], ExtUtils::MakeMaker=>q[6.36], Catalyst::Action::RenderView=>q[0], Test::More=>q[0.88], Catalyst::Plugin::Authentication=>q[0.10023], Catalyst::Runtime=>q[5.90103], Config::JFDI=>q[0.065] }
+#     PREREQ_PM => { Catalyst::Action::RenderView=>q[0], Catalyst::Plugin::Authentication=>q[0.10023], Catalyst::Plugin::Authorization::ACL=>q[0.16], Catalyst::Plugin::Authorization::Roles=>q[0.09], Catalyst::Plugin::ConfigLoader=>q[0], Catalyst::Plugin::Session::Store::DBIC=>q[0], Catalyst::Plugin::Static::Simple=>q[0], Catalyst::Runtime=>q[5.90103], Config::General=>q[2.60], Config::JFDI=>q[0.065], ExtUtils::MakeMaker=>q[6.36], FCGI=>q[0.77], Moose=>q[2.1604], Test::More=>q[0.88], Text::CSV_XS=>q[1.2], namespace::autoclean=>q[0.28] }
 #     TEST_REQUIRES => {  }
 #     VERSION => q[0.01]
 #     VERSION_FROM => q[lib/AddressBook.pm]
@@ -33,7 +33,7 @@
 
 # --- MakeMaker const_config section:
 
-# These definitions are from config.sh (via /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/darwin-2level/Config.pm).
+# These definitions are from config.sh (via /System/Library/Perl/5.18/darwin-thread-multi-2level/Config.pm).
 # They may have been overridden via Makefile.PL or on the command line.
 AR = ar
 CC = cc
@@ -43,20 +43,20 @@ DLEXT = bundle
 DLSRC = dl_dlopen.xs
 EXE_EXT = 
 FULL_AR = /usr/bin/ar
-LD = env MACOSX_DEPLOYMENT_TARGET=10.3 cc
-LDDLFLAGS =  -bundle -undefined dynamic_lookup -L/usr/local/lib -fstack-protector
-LDFLAGS =  -fstack-protector -L/usr/local/lib
+LD = cc -mmacosx-version-min=10.11
+LDDLFLAGS = -arch x86_64 -arch i386 -bundle -undefined dynamic_lookup -fstack-protector
+LDFLAGS = -arch x86_64 -arch i386 -fstack-protector
 LIBC = 
 LIB_EXT = .a
 OBJ_EXT = .o
 OSNAME = darwin
-OSVERS = 11.4.0
-RANLIB = ranlib
-SITELIBEXP = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2
-SITEARCHEXP = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2/darwin-2level
+OSVERS = 15.0
+RANLIB = /usr/bin/ar s
+SITELIBEXP = /Library/Perl/5.18
+SITEARCHEXP = /Library/Perl/5.18/darwin-thread-multi-2level
 SO = dylib
-VENDORARCHEXP = 
-VENDORLIBEXP = 
+VENDORARCHEXP = /Network/Library/Perl/5.18/darwin-thread-multi-2level
+VENDORLIBEXP = /Network/Library/Perl/5.18
 
 
 # --- MakeMaker constants section:
@@ -79,59 +79,61 @@ INST_LIB = blib/lib
 INST_MAN1DIR = blib/man1
 INST_MAN3DIR = blib/man3
 MAN1EXT = 1
-MAN3EXT = 3
+MAN3EXT = 3pm
 INSTALLDIRS = site
 DESTDIR = 
 PREFIX = $(SITEPREFIX)
-PERLPREFIX = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2
-SITEPREFIX = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2
-VENDORPREFIX = 
-INSTALLPRIVLIB = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2
+PERLPREFIX = /
+SITEPREFIX = /usr/local
+VENDORPREFIX = /usr/local
+INSTALLPRIVLIB = /Library/Perl/Updates/5.18.2
 DESTINSTALLPRIVLIB = $(DESTDIR)$(INSTALLPRIVLIB)
-INSTALLSITELIB = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2
+INSTALLSITELIB = /Library/Perl/5.18
 DESTINSTALLSITELIB = $(DESTDIR)$(INSTALLSITELIB)
-INSTALLVENDORLIB = 
+INSTALLVENDORLIB = /Network/Library/Perl/5.18
 DESTINSTALLVENDORLIB = $(DESTDIR)$(INSTALLVENDORLIB)
-INSTALLARCHLIB = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/darwin-2level
+INSTALLARCHLIB = /Library/Perl/Updates/5.18.2/darwin-thread-multi-2level
 DESTINSTALLARCHLIB = $(DESTDIR)$(INSTALLARCHLIB)
-INSTALLSITEARCH = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2/darwin-2level
+INSTALLSITEARCH = /Library/Perl/5.18/darwin-thread-multi-2level
 DESTINSTALLSITEARCH = $(DESTDIR)$(INSTALLSITEARCH)
-INSTALLVENDORARCH = 
+INSTALLVENDORARCH = /Network/Library/Perl/5.18/darwin-thread-multi-2level
 DESTINSTALLVENDORARCH = $(DESTDIR)$(INSTALLVENDORARCH)
-INSTALLBIN = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/bin
+INSTALLBIN = /usr/bin
 DESTINSTALLBIN = $(DESTDIR)$(INSTALLBIN)
-INSTALLSITEBIN = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/bin
+INSTALLSITEBIN = /usr/local/bin
 DESTINSTALLSITEBIN = $(DESTDIR)$(INSTALLSITEBIN)
-INSTALLVENDORBIN = 
+INSTALLVENDORBIN = /usr/local/bin
 DESTINSTALLVENDORBIN = $(DESTDIR)$(INSTALLVENDORBIN)
-INSTALLSCRIPT = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/bin
+INSTALLSCRIPT = /usr/bin
 DESTINSTALLSCRIPT = $(DESTDIR)$(INSTALLSCRIPT)
-INSTALLSITESCRIPT = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/bin
+INSTALLSITESCRIPT = /usr/local/bin
 DESTINSTALLSITESCRIPT = $(DESTDIR)$(INSTALLSITESCRIPT)
-INSTALLVENDORSCRIPT = 
+INSTALLVENDORSCRIPT = /usr/local/bin
 DESTINSTALLVENDORSCRIPT = $(DESTDIR)$(INSTALLVENDORSCRIPT)
-INSTALLMAN1DIR = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/man/man1
+INSTALLMAN1DIR = /usr/share/man/man1
 DESTINSTALLMAN1DIR = $(DESTDIR)$(INSTALLMAN1DIR)
-INSTALLSITEMAN1DIR = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/man/man1
+INSTALLSITEMAN1DIR = /usr/local/share/man/man1
 DESTINSTALLSITEMAN1DIR = $(DESTDIR)$(INSTALLSITEMAN1DIR)
-INSTALLVENDORMAN1DIR = 
+INSTALLVENDORMAN1DIR = /usr/local/share/man/man1
 DESTINSTALLVENDORMAN1DIR = $(DESTDIR)$(INSTALLVENDORMAN1DIR)
-INSTALLMAN3DIR = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/man/man3
+INSTALLMAN3DIR = /usr/share/man/man3
 DESTINSTALLMAN3DIR = $(DESTDIR)$(INSTALLMAN3DIR)
-INSTALLSITEMAN3DIR = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/man/man3
+INSTALLSITEMAN3DIR = /usr/local/share/man/man3
 DESTINSTALLSITEMAN3DIR = $(DESTDIR)$(INSTALLSITEMAN3DIR)
-INSTALLVENDORMAN3DIR = 
+INSTALLVENDORMAN3DIR = /usr/local/share/man/man3
 DESTINSTALLVENDORMAN3DIR = $(DESTDIR)$(INSTALLVENDORMAN3DIR)
 PERL_LIB =
-PERL_ARCHLIB = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/darwin-2level
+PERL_ARCHLIB = /System/Library/Perl/5.18/darwin-thread-multi-2level
+PERL_ARCHLIBDEP = /System/Library/Perl/5.18/darwin-thread-multi-2level
 LIBPERL_A = libperl.a
 FIRST_MAKEFILE = Makefile
 MAKEFILE_OLD = Makefile.old
 MAKE_APERL_FILE = Makefile.aperl
 PERLMAINCC = $(CC)
-PERL_INC = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/lib/5.14.2/darwin-2level/CORE
-PERL = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/bin/perl "-Iinc"
-FULLPERL = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/bin/perl "-Iinc"
+PERL_INC = /System/Library/Perl/5.18/darwin-thread-multi-2level/CORE
+PERL_INCDEP = /System/Library/Perl/5.18/darwin-thread-multi-2level/CORE
+PERL = "/usr/bin/perl" "-Iinc"
+FULLPERL = "/usr/bin/perl" "-Iinc"
 ABSPERL = $(PERL)
 PERLRUN = $(PERL)
 FULLPERLRUN = $(FULLPERL)
@@ -144,9 +146,9 @@ PERM_DIR = 755
 PERM_RW = 644
 PERM_RWX = 755
 
-MAKEMAKER   = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/lib/site_perl/5.14.2/ExtUtils/MakeMaker.pm
-MM_VERSION  = 6.98
-MM_REVISION = 69800
+MAKEMAKER   = /Library/Perl/5.18/ExtUtils/MakeMaker.pm
+MM_VERSION  = 7.1
+MM_REVISION = 71000
 
 # FULLEXT = Pathname for extension directory (eg Foo/Bar/Oracle).
 # BASEEXT = Basename part of FULLEXT. May be just equal FULLEXT. (eg Oracle)
@@ -191,7 +193,7 @@ MAN3PODS = lib/AddressBook.pm \
 	lib/AddressBook/View/HTML.pm
 
 # Where is the Config information that we are using/depend on
-CONFIGDEP = $(PERL_ARCHLIB)$(DFSEP)Config.pm $(PERL_INC)$(DFSEP)config.h
+CONFIGDEP = $(PERL_ARCHLIBDEP)$(DFSEP)Config.pm $(PERL_INCDEP)$(DFSEP)config.h
 
 # Where to build things
 INST_LIBDIR      = $(INST_LIB)
@@ -207,6 +209,7 @@ INST_BOOT        =
 # Extra linker info
 EXPORT_LIST        = 
 PERL_ARCHIVE       = 
+PERL_ARCHIVEDEP    = 
 PERL_ARCHIVE_AFTER = 
 
 
@@ -262,7 +265,7 @@ PM_TO_BLIB = lib/AddressBook.pm \
 
 
 # --- MakeMaker platform_constants section:
-MM_Unix_VERSION = 6.98
+MM_Unix_VERSION = 7.1
 PERL_MALLOC_DEF = -DPERL_EXTMALLOC_DEF -Dmalloc=Perl_malloc -Dfree=Perl_mfree -Drealloc=Perl_realloc -Dcalloc=Perl_calloc
 
 
@@ -502,7 +505,7 @@ manifypods : pure_all  \
 	script/addressbook_test.pl \
 	script/import_csv.pl \
 	script/random_addresses.pl
-	$(NOECHO) $(POD2MAN) --section=1 --perm_rw=$(PERM_RW) \
+	$(NOECHO) $(POD2MAN) --section=1 --perm_rw=$(PERM_RW) -u \
 	  script/addressbook_cgi.pl $(INST_MAN1DIR)/addressbook_cgi.pl.$(MAN1EXT) \
 	  script/addressbook_create.pl $(INST_MAN1DIR)/addressbook_create.pl.$(MAN1EXT) \
 	  script/addressbook_fastcgi.pl $(INST_MAN1DIR)/addressbook_fastcgi.pl.$(MAN1EXT) \
@@ -510,7 +513,7 @@ manifypods : pure_all  \
 	  script/addressbook_test.pl $(INST_MAN1DIR)/addressbook_test.pl.$(MAN1EXT) \
 	  script/import_csv.pl $(INST_MAN1DIR)/import_csv.pl.$(MAN1EXT) \
 	  script/random_addresses.pl $(INST_MAN1DIR)/random_addresses.pl.$(MAN1EXT) 
-	$(NOECHO) $(POD2MAN) --section=3 --perm_rw=$(PERM_RW) \
+	$(NOECHO) $(POD2MAN) --section=3 --perm_rw=$(PERM_RW) -u \
 	  lib/AddressBook.pm $(INST_MAN3DIR)/AddressBook.$(MAN3EXT) \
 	  lib/AddressBook/Controller/Address.pm $(INST_MAN3DIR)/AddressBook::Controller::Address.$(MAN3EXT) \
 	  lib/AddressBook/Controller/Auth.pm $(INST_MAN3DIR)/AddressBook::Controller::Auth.$(MAN3EXT) \
@@ -536,39 +539,15 @@ manifypods : pure_all  \
 
 EXE_FILES = script/addressbook_cgi.pl script/addressbook_create.pl script/addressbook_fastcgi.pl script/addressbook_server.pl script/addressbook_test.pl script/import_csv.pl script/random_addresses.pl
 
-pure_all :: $(INST_SCRIPT)/import_csv.pl $(INST_SCRIPT)/addressbook_create.pl $(INST_SCRIPT)/addressbook_test.pl $(INST_SCRIPT)/addressbook_fastcgi.pl $(INST_SCRIPT)/random_addresses.pl $(INST_SCRIPT)/addressbook_server.pl $(INST_SCRIPT)/addressbook_cgi.pl
+pure_all :: $(INST_SCRIPT)/random_addresses.pl $(INST_SCRIPT)/addressbook_server.pl $(INST_SCRIPT)/addressbook_fastcgi.pl $(INST_SCRIPT)/addressbook_create.pl $(INST_SCRIPT)/import_csv.pl $(INST_SCRIPT)/addressbook_cgi.pl $(INST_SCRIPT)/addressbook_test.pl
 	$(NOECHO) $(NOOP)
 
 realclean ::
 	$(RM_F) \
-	  $(INST_SCRIPT)/import_csv.pl $(INST_SCRIPT)/addressbook_create.pl \
-	  $(INST_SCRIPT)/addressbook_test.pl $(INST_SCRIPT)/addressbook_fastcgi.pl \
 	  $(INST_SCRIPT)/random_addresses.pl $(INST_SCRIPT)/addressbook_server.pl \
-	  $(INST_SCRIPT)/addressbook_cgi.pl 
-
-$(INST_SCRIPT)/import_csv.pl : script/import_csv.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
-	$(NOECHO) $(RM_F) $(INST_SCRIPT)/import_csv.pl
-	$(CP) script/import_csv.pl $(INST_SCRIPT)/import_csv.pl
-	$(FIXIN) $(INST_SCRIPT)/import_csv.pl
-	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/import_csv.pl
-
-$(INST_SCRIPT)/addressbook_create.pl : script/addressbook_create.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
-	$(NOECHO) $(RM_F) $(INST_SCRIPT)/addressbook_create.pl
-	$(CP) script/addressbook_create.pl $(INST_SCRIPT)/addressbook_create.pl
-	$(FIXIN) $(INST_SCRIPT)/addressbook_create.pl
-	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/addressbook_create.pl
-
-$(INST_SCRIPT)/addressbook_test.pl : script/addressbook_test.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
-	$(NOECHO) $(RM_F) $(INST_SCRIPT)/addressbook_test.pl
-	$(CP) script/addressbook_test.pl $(INST_SCRIPT)/addressbook_test.pl
-	$(FIXIN) $(INST_SCRIPT)/addressbook_test.pl
-	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/addressbook_test.pl
-
-$(INST_SCRIPT)/addressbook_fastcgi.pl : script/addressbook_fastcgi.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
-	$(NOECHO) $(RM_F) $(INST_SCRIPT)/addressbook_fastcgi.pl
-	$(CP) script/addressbook_fastcgi.pl $(INST_SCRIPT)/addressbook_fastcgi.pl
-	$(FIXIN) $(INST_SCRIPT)/addressbook_fastcgi.pl
-	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/addressbook_fastcgi.pl
+	  $(INST_SCRIPT)/addressbook_fastcgi.pl $(INST_SCRIPT)/addressbook_create.pl \
+	  $(INST_SCRIPT)/import_csv.pl $(INST_SCRIPT)/addressbook_cgi.pl \
+	  $(INST_SCRIPT)/addressbook_test.pl 
 
 $(INST_SCRIPT)/random_addresses.pl : script/random_addresses.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
 	$(NOECHO) $(RM_F) $(INST_SCRIPT)/random_addresses.pl
@@ -582,11 +561,35 @@ $(INST_SCRIPT)/addressbook_server.pl : script/addressbook_server.pl $(FIRST_MAKE
 	$(FIXIN) $(INST_SCRIPT)/addressbook_server.pl
 	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/addressbook_server.pl
 
+$(INST_SCRIPT)/addressbook_fastcgi.pl : script/addressbook_fastcgi.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
+	$(NOECHO) $(RM_F) $(INST_SCRIPT)/addressbook_fastcgi.pl
+	$(CP) script/addressbook_fastcgi.pl $(INST_SCRIPT)/addressbook_fastcgi.pl
+	$(FIXIN) $(INST_SCRIPT)/addressbook_fastcgi.pl
+	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/addressbook_fastcgi.pl
+
+$(INST_SCRIPT)/addressbook_create.pl : script/addressbook_create.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
+	$(NOECHO) $(RM_F) $(INST_SCRIPT)/addressbook_create.pl
+	$(CP) script/addressbook_create.pl $(INST_SCRIPT)/addressbook_create.pl
+	$(FIXIN) $(INST_SCRIPT)/addressbook_create.pl
+	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/addressbook_create.pl
+
+$(INST_SCRIPT)/import_csv.pl : script/import_csv.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
+	$(NOECHO) $(RM_F) $(INST_SCRIPT)/import_csv.pl
+	$(CP) script/import_csv.pl $(INST_SCRIPT)/import_csv.pl
+	$(FIXIN) $(INST_SCRIPT)/import_csv.pl
+	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/import_csv.pl
+
 $(INST_SCRIPT)/addressbook_cgi.pl : script/addressbook_cgi.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
 	$(NOECHO) $(RM_F) $(INST_SCRIPT)/addressbook_cgi.pl
 	$(CP) script/addressbook_cgi.pl $(INST_SCRIPT)/addressbook_cgi.pl
 	$(FIXIN) $(INST_SCRIPT)/addressbook_cgi.pl
 	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/addressbook_cgi.pl
+
+$(INST_SCRIPT)/addressbook_test.pl : script/addressbook_test.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
+	$(NOECHO) $(RM_F) $(INST_SCRIPT)/addressbook_test.pl
+	$(CP) script/addressbook_test.pl $(INST_SCRIPT)/addressbook_test.pl
+	$(FIXIN) $(INST_SCRIPT)/addressbook_test.pl
+	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/addressbook_test.pl
 
 
 
@@ -730,12 +733,12 @@ disttest : distdir
 
 
 # --- MakeMaker dist_ci section:
-
 ci :
-	$(PERLRUN) "-MExtUtils::Manifest=maniread" \
-	  -e "@all = keys %{ maniread() };" \
-	  -e "print(qq{Executing $(CI) @all\n}); system(qq{$(CI) @all});" \
-	  -e "print(qq{Executing $(RCS_LABEL) ...\n}); system(qq{$(RCS_LABEL) @all});"
+	$(ABSPERLRUN) -MExtUtils::Manifest=maniread -e '@all = sort keys %{ maniread() };' \
+	  -e 'print(qq{Executing $(CI) @all\n});' \
+	  -e 'system(qq{$(CI) @all}) == 0 or die $$!;' \
+	  -e 'print(qq{Executing $(RCS_LABEL) ...\n});' \
+	  -e 'system(qq{$(RCS_LABEL) @all}) == 0 or die $$!;' --
 
 
 # --- MakeMaker distmeta section:
@@ -750,7 +753,7 @@ distmeta : create_distdir metafile
 
 
 # --- MakeMaker distsignature section:
-distsignature : create_distdir
+distsignature : distmeta
 	$(NOECHO) cd $(DISTVNAME) && $(ABSPERLRUN) -MExtUtils::Manifest=maniadd -e 'eval { maniadd({q{SIGNATURE} => q{Public-key signature (added by MakeMaker)}}) }' \
 	  -e '    or print "Could not add SIGNATURE to MANIFEST: $$$${'\''@'\''}\n"' --
 	$(NOECHO) cd $(DISTVNAME) && $(TOUCH) SIGNATURE
@@ -786,88 +789,88 @@ doc__install : doc_site_install
 
 pure_perl_install :: all
 	$(NOECHO) $(MOD_INSTALL) \
-		read $(PERL_ARCHLIB)/auto/$(FULLEXT)/.packlist \
-		write $(DESTINSTALLARCHLIB)/auto/$(FULLEXT)/.packlist \
-		$(INST_LIB) $(DESTINSTALLPRIVLIB) \
-		$(INST_ARCHLIB) $(DESTINSTALLARCHLIB) \
-		$(INST_BIN) $(DESTINSTALLBIN) \
-		$(INST_SCRIPT) $(DESTINSTALLSCRIPT) \
-		$(INST_MAN1DIR) $(DESTINSTALLMAN1DIR) \
-		$(INST_MAN3DIR) $(DESTINSTALLMAN3DIR)
+		read "$(PERL_ARCHLIB)/auto/$(FULLEXT)/.packlist" \
+		write "$(DESTINSTALLARCHLIB)/auto/$(FULLEXT)/.packlist" \
+		"$(INST_LIB)" "$(DESTINSTALLPRIVLIB)" \
+		"$(INST_ARCHLIB)" "$(DESTINSTALLARCHLIB)" \
+		"$(INST_BIN)" "$(DESTINSTALLBIN)" \
+		"$(INST_SCRIPT)" "$(DESTINSTALLSCRIPT)" \
+		"$(INST_MAN1DIR)" "$(DESTINSTALLMAN1DIR)" \
+		"$(INST_MAN3DIR)" "$(DESTINSTALLMAN3DIR)"
 	$(NOECHO) $(WARN_IF_OLD_PACKLIST) \
-		$(SITEARCHEXP)/auto/$(FULLEXT)
+		"$(SITEARCHEXP)/auto/$(FULLEXT)"
 
 
 pure_site_install :: all
 	$(NOECHO) $(MOD_INSTALL) \
-		read $(SITEARCHEXP)/auto/$(FULLEXT)/.packlist \
-		write $(DESTINSTALLSITEARCH)/auto/$(FULLEXT)/.packlist \
-		$(INST_LIB) $(DESTINSTALLSITELIB) \
-		$(INST_ARCHLIB) $(DESTINSTALLSITEARCH) \
-		$(INST_BIN) $(DESTINSTALLSITEBIN) \
-		$(INST_SCRIPT) $(DESTINSTALLSITESCRIPT) \
-		$(INST_MAN1DIR) $(DESTINSTALLSITEMAN1DIR) \
-		$(INST_MAN3DIR) $(DESTINSTALLSITEMAN3DIR)
+		read "$(SITEARCHEXP)/auto/$(FULLEXT)/.packlist" \
+		write "$(DESTINSTALLSITEARCH)/auto/$(FULLEXT)/.packlist" \
+		"$(INST_LIB)" "$(DESTINSTALLSITELIB)" \
+		"$(INST_ARCHLIB)" "$(DESTINSTALLSITEARCH)" \
+		"$(INST_BIN)" "$(DESTINSTALLSITEBIN)" \
+		"$(INST_SCRIPT)" "$(DESTINSTALLSITESCRIPT)" \
+		"$(INST_MAN1DIR)" "$(DESTINSTALLSITEMAN1DIR)" \
+		"$(INST_MAN3DIR)" "$(DESTINSTALLSITEMAN3DIR)"
 	$(NOECHO) $(WARN_IF_OLD_PACKLIST) \
-		$(PERL_ARCHLIB)/auto/$(FULLEXT)
+		"$(PERL_ARCHLIB)/auto/$(FULLEXT)"
 
 pure_vendor_install :: all
 	$(NOECHO) $(MOD_INSTALL) \
-		read $(VENDORARCHEXP)/auto/$(FULLEXT)/.packlist \
-		write $(DESTINSTALLVENDORARCH)/auto/$(FULLEXT)/.packlist \
-		$(INST_LIB) $(DESTINSTALLVENDORLIB) \
-		$(INST_ARCHLIB) $(DESTINSTALLVENDORARCH) \
-		$(INST_BIN) $(DESTINSTALLVENDORBIN) \
-		$(INST_SCRIPT) $(DESTINSTALLVENDORSCRIPT) \
-		$(INST_MAN1DIR) $(DESTINSTALLVENDORMAN1DIR) \
-		$(INST_MAN3DIR) $(DESTINSTALLVENDORMAN3DIR)
+		read "$(VENDORARCHEXP)/auto/$(FULLEXT)/.packlist" \
+		write "$(DESTINSTALLVENDORARCH)/auto/$(FULLEXT)/.packlist" \
+		"$(INST_LIB)" "$(DESTINSTALLVENDORLIB)" \
+		"$(INST_ARCHLIB)" "$(DESTINSTALLVENDORARCH)" \
+		"$(INST_BIN)" "$(DESTINSTALLVENDORBIN)" \
+		"$(INST_SCRIPT)" "$(DESTINSTALLVENDORSCRIPT)" \
+		"$(INST_MAN1DIR)" "$(DESTINSTALLVENDORMAN1DIR)" \
+		"$(INST_MAN3DIR)" "$(DESTINSTALLVENDORMAN3DIR)"
 
 
 doc_perl_install :: all
-	$(NOECHO) $(ECHO) Appending installation info to $(DESTINSTALLARCHLIB)/perllocal.pod
-	-$(NOECHO) $(MKPATH) $(DESTINSTALLARCHLIB)
+	$(NOECHO) $(ECHO) Appending installation info to "$(DESTINSTALLARCHLIB)/perllocal.pod"
+	-$(NOECHO) $(MKPATH) "$(DESTINSTALLARCHLIB)"
 	-$(NOECHO) $(DOC_INSTALL) \
 		"Module" "$(NAME)" \
-		"installed into" "$(INSTALLPRIVLIB)" \
+		"installed into" $(INSTALLPRIVLIB) \
 		LINKTYPE "$(LINKTYPE)" \
 		VERSION "$(VERSION)" \
 		EXE_FILES "$(EXE_FILES)" \
-		>> $(DESTINSTALLARCHLIB)/perllocal.pod
+		>> "$(DESTINSTALLARCHLIB)/perllocal.pod"
 
 doc_site_install :: all
-	$(NOECHO) $(ECHO) Appending installation info to $(DESTINSTALLARCHLIB)/perllocal.pod
-	-$(NOECHO) $(MKPATH) $(DESTINSTALLARCHLIB)
+	$(NOECHO) $(ECHO) Appending installation info to "$(DESTINSTALLARCHLIB)/perllocal.pod"
+	-$(NOECHO) $(MKPATH) "$(DESTINSTALLARCHLIB)"
 	-$(NOECHO) $(DOC_INSTALL) \
 		"Module" "$(NAME)" \
-		"installed into" "$(INSTALLSITELIB)" \
+		"installed into" $(INSTALLSITELIB) \
 		LINKTYPE "$(LINKTYPE)" \
 		VERSION "$(VERSION)" \
 		EXE_FILES "$(EXE_FILES)" \
-		>> $(DESTINSTALLARCHLIB)/perllocal.pod
+		>> "$(DESTINSTALLARCHLIB)/perllocal.pod"
 
 doc_vendor_install :: all
-	$(NOECHO) $(ECHO) Appending installation info to $(DESTINSTALLARCHLIB)/perllocal.pod
-	-$(NOECHO) $(MKPATH) $(DESTINSTALLARCHLIB)
+	$(NOECHO) $(ECHO) Appending installation info to "$(DESTINSTALLARCHLIB)/perllocal.pod"
+	-$(NOECHO) $(MKPATH) "$(DESTINSTALLARCHLIB)"
 	-$(NOECHO) $(DOC_INSTALL) \
 		"Module" "$(NAME)" \
-		"installed into" "$(INSTALLVENDORLIB)" \
+		"installed into" $(INSTALLVENDORLIB) \
 		LINKTYPE "$(LINKTYPE)" \
 		VERSION "$(VERSION)" \
 		EXE_FILES "$(EXE_FILES)" \
-		>> $(DESTINSTALLARCHLIB)/perllocal.pod
+		>> "$(DESTINSTALLARCHLIB)/perllocal.pod"
 
 
 uninstall :: uninstall_from_$(INSTALLDIRS)dirs
 	$(NOECHO) $(NOOP)
 
 uninstall_from_perldirs ::
-	$(NOECHO) $(UNINSTALL) $(PERL_ARCHLIB)/auto/$(FULLEXT)/.packlist
+	$(NOECHO) $(UNINSTALL) "$(PERL_ARCHLIB)/auto/$(FULLEXT)/.packlist"
 
 uninstall_from_sitedirs ::
-	$(NOECHO) $(UNINSTALL) $(SITEARCHEXP)/auto/$(FULLEXT)/.packlist
+	$(NOECHO) $(UNINSTALL) "$(SITEARCHEXP)/auto/$(FULLEXT)/.packlist"
 
 uninstall_from_vendordirs ::
-	$(NOECHO) $(UNINSTALL) $(VENDORARCHEXP)/auto/$(FULLEXT)/.packlist
+	$(NOECHO) $(UNINSTALL) "$(VENDORARCHEXP)/auto/$(FULLEXT)/.packlist"
 
 
 # --- MakeMaker force section:
@@ -899,7 +902,7 @@ $(FIRST_MAKEFILE) : Makefile.PL $(CONFIGDEP)
 
 # --- MakeMaker makeaperl section ---
 MAP_TARGET    = perl
-FULLPERL      = /Users/christopherburger/perl5/perlbrew/perls/perl-5.14.2/bin/perl
+FULLPERL      = "/usr/bin/perl"
 
 $(MAP_TARGET) :: static $(MAKE_APERL_FILE)
 	$(MAKE) $(USEMAKEFILE) $(MAKE_APERL_FILE) $@
@@ -907,7 +910,7 @@ $(MAP_TARGET) :: static $(MAKE_APERL_FILE)
 $(MAKE_APERL_FILE) : $(FIRST_MAKEFILE) pm_to_blib
 	$(NOECHO) $(ECHO) Writing \"$(MAKE_APERL_FILE)\" for this $(MAP_TARGET)
 	$(NOECHO) $(PERLRUNINST) \
-		Makefile.PL DIR= \
+		Makefile.PL DIR="" \
 		MAKEFILE=$(MAKE_APERL_FILE) LINKTYPE=static \
 		MAKEAPERL=1 NORECURS=1 CCCDLFLAGS=
 
@@ -955,13 +958,13 @@ ppd :
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Plugin::Session::Store::DBIC" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Plugin::Static::Simple" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Runtime" VERSION="5.90103" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Config::General" VERSION="2.6" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Config::General" VERSION="2.60" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Config::JFDI" VERSION="0.065" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="FCGI::" VERSION="0.77" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Moose::" VERSION="2.1604" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Text::CSV_XS" VERSION="1.2" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="namespace::autoclean" VERSION="0.28" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="darwin-2level-5.14" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="darwin-thread-multi-2level-5.18" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    </IMPLEMENTATION>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '</SOFTPKG>' >> $(DISTNAME).ppd
@@ -1023,7 +1026,7 @@ config :: installdeps
 	$(NOECHO) $(NOOP)
 
 checkdeps ::
-	$(PERL) Makefile.pl --checkdeps
+	$(PERL) Makefile.PL --checkdeps
 
 installdeps ::
 	$(NOECHO) $(NOOP)
@@ -1032,10 +1035,10 @@ installdeps_notest ::
 	$(NOECHO) $(NOOP)
 
 upgradedeps ::
-	$(PERL) Makefile.pl --config= --upgradedeps=Test::More,0.88,Catalyst::Runtime,5.90103,Catalyst::Plugin::ConfigLoader,0,Catalyst::Plugin::Static::Simple,0,Catalyst::Action::RenderView,0,Catalyst::Plugin::Session::Store::DBIC,0,Catalyst::Plugin::Authentication,0.10023,Catalyst::Plugin::Authorization::Roles,0.09,Catalyst::Plugin::Authorization::ACL,0.16,Text::CSV_XS,1.2,Config::JFDI,0.065,Moose,2.1604,namespace::autoclean,0.28,Config::General,2.60,FCGI,0.77
+	$(PERL) Makefile.PL --config= --upgradedeps=Test::More,0.88,Catalyst::Runtime,5.90103,Catalyst::Plugin::ConfigLoader,0,Catalyst::Plugin::Static::Simple,0,Catalyst::Action::RenderView,0,Catalyst::Plugin::Session::Store::DBIC,0,Catalyst::Plugin::Authentication,0.10023,Catalyst::Plugin::Authorization::Roles,0.09,Catalyst::Plugin::Authorization::ACL,0.16,Text::CSV_XS,1.2,Config::JFDI,0.065,Moose,2.1604,namespace::autoclean,0.28,Config::General,2.60,FCGI,0.77
 
 upgradedeps_notest ::
-	$(PERL) Makefile.pl --config=notest,1 --upgradedeps=Test::More,0.88,Catalyst::Runtime,5.90103,Catalyst::Plugin::ConfigLoader,0,Catalyst::Plugin::Static::Simple,0,Catalyst::Action::RenderView,0,Catalyst::Plugin::Session::Store::DBIC,0,Catalyst::Plugin::Authentication,0.10023,Catalyst::Plugin::Authorization::Roles,0.09,Catalyst::Plugin::Authorization::ACL,0.16,Text::CSV_XS,1.2,Config::JFDI,0.065,Moose,2.1604,namespace::autoclean,0.28,Config::General,2.60,FCGI,0.77
+	$(PERL) Makefile.PL --config=notest,1 --upgradedeps=Test::More,0.88,Catalyst::Runtime,5.90103,Catalyst::Plugin::ConfigLoader,0,Catalyst::Plugin::Static::Simple,0,Catalyst::Action::RenderView,0,Catalyst::Plugin::Session::Store::DBIC,0,Catalyst::Plugin::Authentication,0.10023,Catalyst::Plugin::Authorization::Roles,0.09,Catalyst::Plugin::Authorization::ACL,0.16,Text::CSV_XS,1.2,Config::JFDI,0.065,Moose,2.1604,namespace::autoclean,0.28,Config::General,2.60,FCGI,0.77
 
 listdeps ::
 	@$(PERL) -le "print for @ARGV" 
